@@ -1,11 +1,18 @@
 version: 2.1
 
+orbs:
+  1password: onepassword/secrets@1.0.0
 jobs:
   build:
     docker:
       - image: cimg/node:20.4
     steps:
       - checkout
+      - 1password/install-cli:
+          version: 2.31.1
+      - 1password/export:
+          var-name: OLIVER_TEST
+          secret-reference: op://Sandbox/secret-sample/credential
       - run:
           name: Run script
           command: npm start

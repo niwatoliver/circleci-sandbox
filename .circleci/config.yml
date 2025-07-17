@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:20.4
+    steps:
+      - checkout
+      - run: npm ci
+      - run:
+          name: Run script
+          command: npm start
+workflows:
+  build-workflow:
+    jobs:
+      - build
